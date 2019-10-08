@@ -8,6 +8,21 @@ namespace ListTest
   {
 
     [TestMethod]
+    public void Constructor_CreateEmptyClassWithSetCapacity()
+    {
+      // arrange
+      CustomList<int> testList = new CustomList<int>(3);
+      testList[2] = 4;
+
+      // act
+      int actual = testList[2];
+      int expected = 4;
+
+      // assert
+      Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
     public void Add_AddToEmptyList_ItemGoesToIndexZero()
     {
       // arrange

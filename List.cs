@@ -18,6 +18,11 @@ namespace List
       items = new T[0];
     }
 
+    public CustomList(int startingLength)
+    {
+      items = new T[startingLength];
+    }
+
     public T this[int i]
     {
       get { return items[i]; }
