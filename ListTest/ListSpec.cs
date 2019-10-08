@@ -168,5 +168,94 @@ namespace ListTest
       Assert.AreEqual(expected, actual);
     }
 
+    [TestMethod]
+    public void Remove_RemoveLastIntItem_CountReduces()
+    {
+      // arrange
+      CustomList<int> customList = new CustomList<int>(5);
+      int actual;
+      int expected = 9;
+
+      // act
+      customList.Add(1);
+      customList.Add(2);
+      customList.Add(3);
+      customList.Add(4);
+      customList.Add(5);
+      customList.Remove(5);
+
+      actual = customList.Count;
+
+      // assert
+      Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void Remove_RemoveSecondToLastIntItem_CountReduces()
+    {
+      // arrange
+      CustomList<int> customList = new CustomList<int>(5);
+      int actual;
+      int expected = 9; ;
+
+      // act
+      customList.Add(1);
+      customList.Add(2);
+      customList.Add(3);
+      customList.Add(4);
+      customList.Add(5);
+      customList.Remove(5);
+
+      actual = customList.Count;
+
+      // assert
+      Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void Remove_RemoveLastIntItem_ElementIsRemoved()
+    {
+      // arrange
+      CustomList<int> customList = new CustomList<int>(5);
+      int actual;
+      int expected = 4; ;
+
+      // act
+      customList.Add(1);
+      customList.Add(2);
+      customList.Add(3);
+      customList.Add(4);
+      customList.Add(5);
+      customList.Remove(5);
+
+      actual = customList[9];
+
+      // assert
+      Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void Remove_RemoveSecondToLastIntItem_ElementIsRemoved()
+    {
+      // arrange
+      CustomList<int> customList = new CustomList<int>(5);
+      int actual;
+      int expected = 5; ;
+
+      // act
+      customList.Add(1);
+      customList.Add(2);
+      customList.Add(3);
+      customList.Add(4);
+      customList.Add(5);
+      customList.Remove(4);
+
+      actual = customList[9];
+
+      // assert
+      Assert.AreEqual(expected, actual);
+    }
+
+
   }
 }
