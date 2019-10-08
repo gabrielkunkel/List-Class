@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using List;
+﻿using List;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ListTest
 {

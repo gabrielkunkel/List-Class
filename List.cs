@@ -5,12 +5,17 @@ namespace List
   public class CustomList<T> : IEnumerable
   {
     private T[] items;
-    public int Count;
-
+    public int Count
+    {
+      get
+      {
+        return items.Length;
+      }
+    }
 
     public CustomList()
     {
-      items = new T[4];
+      items = new T[0];
     }
 
     public T this[int i]
@@ -21,7 +26,14 @@ namespace List
 
     public void Add(T itemToAdd)
     {
+      T[] newArray = new T[items.Length + 1];
 
+      for (int i = 0; i < items.Length; i++)
+      {
+        newArray[i] = items[i];
+      }
+      newArray[newArray.Length - 1] = itemToAdd;
+      items = newArray;
     }
 
     public IEnumerator GetEnumerator()
