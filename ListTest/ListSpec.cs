@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ListTest
 {
@@ -39,10 +38,41 @@ namespace ListTest
       Assert.AreEqual(expected, actual);
     }
 
-    // unit test for adding multiple items to check position of last item
-    // unit test for adding multiple items to check Count property
-    // unit test for adding number of items beyond 'Capacity' but it still adds
+    [TestMethod]
+    public void Add_AddMultipleItemsToList_CheckPositionOfLastItem()
+    {
+      // arrange
+      CustomList<int> testList = new CustomList<int>();
+      int expected = 6;
+      int actual;
 
+      // act
+      testList.Add(4);
+      testList.Add(5);
+      testList.Add(6);
+      actual = testList[testList.Count - 1];
+
+      // assert
+      Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void Add_AddMultipleItemsToList_CountProperty()
+    {
+      // arrange
+      CustomList<int> testList = new CustomList<int>();
+      int expected = 3;
+      int actual;
+
+      // act
+      testList.Add(4);
+      testList.Add(5);
+      testList.Add(6);
+      actual = testList.Count;
+
+      // assert
+      Assert.AreEqual(expected, actual);
+    }
 
   }
 }
