@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace List
 {
-  public class CustomList<T> : IEnumerable
+  public class CustomList<T> : IEnumerable<T>
   {
     private T[] items;
     private int count;
@@ -67,6 +68,8 @@ namespace List
       ShrinkItemsArrayCapacity();
     }
 
+
+
     private void SearchAndRemoveFirstInstance(T itemToRemove)
     {
       bool firstInstanceFound = false;
@@ -126,7 +129,7 @@ namespace List
       return workingArray;
     }
 
-    public IEnumerator GetEnumerator()
+    public IEnumerator<T> GetEnumerator()
     {
       foreach (T item in items)
       {
@@ -138,5 +141,11 @@ namespace List
         yield return item;
       }
     }
+
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+      return this.GetEnumerator();
+    }
+
   }
 }
