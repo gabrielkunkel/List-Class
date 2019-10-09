@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 namespace List
 {
   public class CustomList<T> : IEnumerable
   {
     private T[] items;
+    private int count;
 
     public int Capacity
     {
@@ -14,62 +16,80 @@ namespace List
       }
     }
 
-    public int Count { get => getTotalElementsUsed(); }
-    // todo: when you set Count, check capacity and update it accordingly?
-
+    public int Count { get => count; }
 
     public CustomList()
     {
-      items = new T[0];
+      items = new T[1];
     }
 
-    public CustomList(int startingLength)
+    public CustomList(int startingCapacity)
     {
-      items = new T[startingLength];
+      items = new T[startingCapacity];
     }
 
     public T this[int i]
     {
-      get { return items[i]; }
-      // todo: if out of Count range throw exception
-      set { items[i] = value; }
+      get { 
+        if (i < 0 || i >= count)
+        {
+          throw new IndexOutOfRangeException();
+        }
+        else
+        {
+          return items[i];
+        }
+      }
+      set {
+        if (i < 0 || i > count)
+        {
+          throw new ArgumentOutOfRangeException();
+        }
+        else
+        {
+          items[i] = value;
+        } 
+      }
     }
 
     public void Add(T itemToAdd)
     {
-      T[] newArray = new T[items.Length + 1];
-      // todo: set length at 2X threshold when at capacity
-
-      for (int i = 0; i < items.Length; i++)
-      {
-        newArray[i] = items[i];
-      }
-      newArray[newArray.Length - 1] = itemToAdd;
-      items = newArray;
+      count += 1;
+      T[] workingArray = SetArraySize(ref items);
+      workingArray[count-1] = itemToAdd;
+      items = workingArray;
     }
 
     public void Remove(T itemToRemove)
     {
-      // todo: reduce length at Capacity/2
-
+      count -= 1;
+      T[] workingArray = SetArraySize(ref items);
+      workingArray[count-1] = itemToRemove;
     }
 
-    private int getTotalElementsUsed()
+    public T[] SetArraySize(ref T[] workingArray)
     {
-      int totalElementsUsed = 0;
+      if (count > Capacity)
+      {
+        return buildNewArray(new T[Capacity * 2]);
+      }
+      else if (count < Capacity / 2)
+      {
+        return buildNewArray(new T[Capacity / 2]);
+      }
+      else
+      {
+        return workingArray;
+      }
+    }
 
+    private T[] buildNewArray(T[] workingArray)
+    {
       for (int i = 0; i < items.Length; i++)
       {
-        if (items[i] == null)
-        {
-          continue;
-        }
-        else
-        {
-          totalElementsUsed += 1;
-        }
+        workingArray[i] = items[i];
       }
-      return totalElementsUsed;
+      return workingArray;
     }
 
     public IEnumerator GetEnumerator()

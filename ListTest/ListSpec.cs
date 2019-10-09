@@ -40,12 +40,47 @@ namespace ListTest
 
     [TestMethod]
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
-    public void Capacity_StringCreateEmptyClassWithConstructorSet_ShouldThrow()
+    public void Capacity_IntCreateEmptyClassWithConstructorSet_ShouldThrow()
     {
-      CustomList<string> testList = new CustomList<string>(3);
-      testList[2] = "Daryl";
+      CustomList<int> testList = new CustomList<int>(3);
+      testList[2] = 5;
     }
 
+    //[TestMethod]
+    //public void SetArraySize_AddPastCapacity_Return2TimesArraySize()
+    //{
+    //  string[] workingArray = new string[]
+
+
+    //}
+
+
+
+    [TestMethod]
+    public void Add_ListIncreasesCapacityPassingCapacity_CapacityGoesUpTimes2()
+    {
+      CustomList<int> testList = new CustomList<int>();
+      
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+
+      Assert.AreEqual(4, testList.Capacity);
+    }
+
+    [TestMethod]
+    public void Add_ListIncreasesCapacityPassingCapacity_CapacityGoesUpTimes2Past4()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+      testList.Add(4);
+      testList.Add(5);
+
+      Assert.AreEqual(8, testList.Capacity);
+    }
 
     [TestMethod]
     public void Add_AddToEmptyList_ItemGoesToIndexZero()
@@ -199,6 +234,27 @@ namespace ListTest
       Assert.AreEqual(expected, actual);
     }
 
+    [TestMethod]
+    public void Remove_ListDecreasesCapacity_CapacityGoesDownTimes2()
+    {
+      CustomList<int> testList = new CustomList<int>();
 
+      testList.Add(0);
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+      testList.Add(4);
+      testList.Add(5);
+      testList.Add(6);
+      testList.Add(7);
+      testList.Add(8);
+
+      Assert.AreEqual(16, testList.Capacity);
+
+      testList.Remove(8);
+      testList.Remove(9);
+
+      Assert.AreEqual(8, testList.Capacity);
+    }
   }
 }
