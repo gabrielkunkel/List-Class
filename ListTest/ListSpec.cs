@@ -46,16 +46,6 @@ namespace ListTest
       testList[2] = 5;
     }
 
-    //[TestMethod]
-    //public void SetArraySize_AddPastCapacity_Return2TimesArraySize()
-    //{
-    //  string[] workingArray = new string[]
-
-
-    //}
-
-
-
     [TestMethod]
     public void Add_ListIncreasesCapacityPassingCapacity_CapacityGoesUpTimes2()
     {
@@ -80,6 +70,13 @@ namespace ListTest
       testList.Add(5);
 
       Assert.AreEqual(8, testList.Capacity);
+
+      testList.Add(6);
+      testList.Add(7);
+      testList.Add(8);
+      testList.Add(9);
+
+      Assert.AreEqual(16, testList.Capacity);
     }
 
     [TestMethod]
@@ -154,9 +151,9 @@ namespace ListTest
     public void Remove_RemoveLastIntItem_CountReduces()
     {
       // arrange
-      CustomList<int> customList = new CustomList<int>(5);
+      CustomList<int> customList = new CustomList<int>();
       int actual;
-      int expected = 9;
+      int expected = 4;
 
       // act
       customList.Add(1);
@@ -176,9 +173,9 @@ namespace ListTest
     public void Remove_RemoveSecondToLastIntItem_CountReduces()
     {
       // arrange
-      CustomList<int> customList = new CustomList<int>(5);
+      CustomList<int> customList = new CustomList<int>();
       int actual;
-      int expected = 9;
+      int expected = 4;
 
       // act
       customList.Add(1);
@@ -195,43 +192,39 @@ namespace ListTest
     }
 
     [TestMethod]
-    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    [ExpectedException(typeof(IndexOutOfRangeException))]
     public void Remove_RemoveLastIntItem_ElementIsRemoved()
     {
       // arrange
-      CustomList<int> customList = new CustomList<int>(5);
+      CustomList<int> customList = new CustomList<int>();
 
       // act
-      customList.Add(5);
-      customList.Add(4);
-      customList.Add(3);
-      customList.Add(2);
+      customList.Add(0);
       customList.Add(1);
-      customList.Remove(1);
+      customList.Add(2);
+      customList.Add(3);
+      customList.Add(4);
+      customList.Remove(4);
 
-      int actual = customList[9]; // throws exception
+      int actual = customList[4]; // throws exception
     }
 
     [TestMethod]
     public void Remove_RemoveSecondToLastIntItem_ElementIsRemoved()
     {
       // arrange
-      CustomList<int> customList = new CustomList<int>(5);
-      int actual;
-      int expected = 5;
+      CustomList<int> customList = new CustomList<int>();
 
       // act
+      customList.Add(0);
       customList.Add(1);
       customList.Add(2);
       customList.Add(3);
       customList.Add(4);
-      customList.Add(5);
-      customList.Remove(4);
-
-      actual = customList[8];
+      customList.Remove(3);
 
       // assert
-      Assert.AreEqual(expected, actual);
+      Assert.AreEqual(4, customList[3]);
     }
 
     [TestMethod]
@@ -239,7 +232,6 @@ namespace ListTest
     {
       CustomList<int> testList = new CustomList<int>();
 
-      testList.Add(0);
       testList.Add(1);
       testList.Add(2);
       testList.Add(3);
@@ -248,13 +240,32 @@ namespace ListTest
       testList.Add(6);
       testList.Add(7);
       testList.Add(8);
+      testList.Add(9); // count == 9
 
+      Assert.AreEqual(9, testList.Count);
       Assert.AreEqual(16, testList.Capacity);
 
-      testList.Remove(8);
-      testList.Remove(9);
+      testList.Remove(8); // count == 8
+      testList.Remove(9); // count == 7
 
       Assert.AreEqual(8, testList.Capacity);
+    }
+
+    [TestMethod]
+    public void Remove_ListDecreasesCount_CountGoesDownBy1()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(0);
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+
+      Assert.AreEqual(4, testList.Count);
+
+      testList.Remove(2);
+
+      Assert.AreEqual(3, testList.Count);
     }
   }
 }

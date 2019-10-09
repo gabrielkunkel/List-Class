@@ -55,7 +55,7 @@ namespace List
     public void Add(T itemToAdd)
     {
       count += 1;
-      T[] workingArray = SetArraySize(ref items);
+      T[] workingArray = SetItemsArrayCapacityForGrowth(ref items);
       workingArray[count-1] = itemToAdd;
       items = workingArray;
     }
@@ -63,19 +63,36 @@ namespace List
     public void Remove(T itemToRemove)
     {
       count -= 1;
-      T[] workingArray = SetArraySize(ref items);
-      workingArray[count-1] = itemToRemove;
+      SearchAndRemoveFirstInstance(itemToRemove);
+      ShrinkItemsArrayCapacity();
     }
 
-    public T[] SetArraySize(ref T[] workingArray)
+    private void SearchAndRemoveFirstInstance(T itemToRemove)
+    {
+      bool firstInstanceFound = false;
+
+      for (int i = 0; i < items.Length; i++)
+      {
+        if (firstInstanceFound == false)
+        {
+          if (object.Equals(itemToRemove, items[i]))
+          {
+            firstInstanceFound = true;
+            continue;
+          }
+        }
+        else
+        {
+          items[i-1] = items[i];
+        }
+      }
+    }
+
+    private T[] SetItemsArrayCapacityForGrowth(ref T[] workingArray)
     {
       if (count > Capacity)
       {
-        return buildNewArray(new T[Capacity * 2]);
-      }
-      else if (count < Capacity / 2)
-      {
-        return buildNewArray(new T[Capacity / 2]);
+        return BuildLargerArray(new T[Capacity * 2]);
       }
       else
       {
@@ -83,9 +100,26 @@ namespace List
       }
     }
 
-    private T[] buildNewArray(T[] workingArray)
+    private void ShrinkItemsArrayCapacity()
+    {
+      if (count < Capacity / 2)
+      {
+        items = BuildSmallerArray(new T[Capacity / 2]);
+      }
+    }
+
+    private T[] BuildLargerArray(T[] workingArray)
     {
       for (int i = 0; i < items.Length; i++)
+      {
+        workingArray[i] = items[i];
+      }
+      return workingArray;
+    }
+
+    private T[] BuildSmallerArray(T[] workingArray)
+    {
+      for (int i = 0; i < workingArray.Length; i++)
       {
         workingArray[i] = items[i];
       }
