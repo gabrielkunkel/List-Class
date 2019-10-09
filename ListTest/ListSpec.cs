@@ -290,5 +290,39 @@ namespace ListTest
       Assert.AreEqual(expected, actual);
     }
 
+    [TestMethod]
+    public void ToString_WithInts()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(0);
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+      testList.Add(4);
+
+      string expected = "[0, 1, 2, 3, 4]";
+      string actual = testList.ToString();
+
+      Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void ToString_WithStrings()
+    {
+      CustomList<string> testList = new CustomList<string>();
+
+      testList.Add("bob");
+      testList.Add("bob");
+      testList.Add("bob");
+      testList.Add("bob");
+      testList.Add("bob");
+
+      string expected = "[bob, bob, bob, bob, bob]";
+      string actual = testList.ToString();
+
+      Assert.AreEqual(expected, actual);
+    }
+
   }
 }

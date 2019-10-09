@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 namespace List
 {
@@ -68,7 +69,24 @@ namespace List
       ShrinkItemsArrayCapacity();
     }
 
+    public override string ToString()
+    {
+      StringBuilder workingString = new StringBuilder();
+      workingString.Append("[");
 
+      for (int i = 0; i < Count; i++)
+      {
+        workingString.Append(items[i]);
+
+        if(i < Count-1)
+        {
+          workingString.Append(", ");
+        }
+      }
+      workingString.Append("]");
+
+      return workingString.ToString();
+    }
 
     private void SearchAndRemoveFirstInstance(T itemToRemove)
     {
@@ -131,15 +149,17 @@ namespace List
 
     public IEnumerator<T> GetEnumerator()
     {
-      foreach (T item in items)
+
+      for (int i = 0; i < Count; i++)
       {
-        if (item == null)
+        if (items[i] == null)
         {
           break;
         }
+        yield return items[i];
 
-        yield return item;
       }
+
     }
 
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
