@@ -128,7 +128,15 @@ namespace List
 
     public IEnumerator GetEnumerator()
     {
-      throw new System.NotImplementedException();
+      foreach (T item in items)
+      {
+        if (item == null)
+        {
+          break;
+        }
+
+        yield return item;
+      }
     }
   }
 }

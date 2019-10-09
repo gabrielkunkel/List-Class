@@ -267,5 +267,28 @@ namespace ListTest
 
       Assert.AreEqual(3, testList.Count);
     }
+
+    [TestMethod]
+    public void GetEnumerator_UseForEachOnIntList()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(0);
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+      testList.Add(4);
+
+      int expected = 10;
+      int actual = 0;
+
+      foreach (int item in testList)
+      {
+        actual += item;
+      }
+
+      Assert.AreEqual(expected, actual);
+    }
+
   }
 }
