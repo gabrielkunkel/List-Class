@@ -45,6 +45,11 @@ namespace List
       items = newArray;
     }
 
+    public void Remove(T itemToRemove)
+    {
+
+    }
+
     private int getTotalElementsUsed()
     {
       int totalElementsUsed = 0;
