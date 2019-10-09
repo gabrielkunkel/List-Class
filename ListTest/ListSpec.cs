@@ -324,5 +324,76 @@ namespace ListTest
       Assert.AreEqual(expected, actual);
     }
 
+    [TestMethod]
+    public void PlusOperator_CombineTwoIntLists()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(0);
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+      testList.Add(4);
+
+      CustomList<int> testListb = new CustomList<int>();
+
+      testListb.Add(5);
+      testListb.Add(6);
+      testListb.Add(7);
+      testListb.Add(8);
+      testListb.Add(9);
+
+      CustomList<int> actual = testList + testListb;
+      CustomList<int> testListc = new CustomList<int>();
+
+      testListc.Add(0);
+      testListc.Add(1);
+      testListc.Add(2);
+      testListc.Add(3);
+      testListc.Add(4);
+      testListc.Add(5);
+      testListc.Add(6);
+      testListc.Add(7);
+      testListc.Add(8);
+      testListc.Add(9);
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], actual[i]);
+      }
+    }
+
+    [TestMethod]
+    public void MinusOperator_SubtractOneIstanceFromAnother()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(0);
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+      testList.Add(4);
+
+      CustomList<int> testListb = new CustomList<int>();
+
+      testListb.Add(0);
+      testListb.Add(1);
+      testListb.Add(5);
+      testListb.Add(6);
+      testListb.Add(7);
+
+      CustomList<int> actual = testList - testListb;
+      CustomList<int> testListc = new CustomList<int>();
+
+      testListc.Add(2);
+      testListc.Add(3);
+      testListc.Add(4);
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], actual[i]);
+      }
+    }
+
   }
 }

@@ -69,6 +69,31 @@ namespace List
       ShrinkItemsArrayCapacity();
     }
 
+    public static CustomList<T> operator + (CustomList<T> a, CustomList<T> b)
+    {
+      foreach (T item in b)
+      {
+        a.Add(item);
+      }
+
+      return a;
+    }
+
+    public static CustomList<T> operator - (CustomList<T> a, CustomList<T> b)
+    {
+      CustomList<T> newList = new CustomList<T>();
+
+      for (int i = 0; i < a.Count; i++)
+      {
+        if(IsElementInCustomList(a[i], b) == false)
+        {
+          newList.Add(a[i]);
+        }
+      }
+
+      return newList;
+    }
+
     public override string ToString()
     {
       StringBuilder workingString = new StringBuilder();
@@ -86,6 +111,22 @@ namespace List
       workingString.Append("]");
 
       return workingString.ToString();
+    }
+
+    private static bool IsElementInCustomList(T element, CustomList<T> customList)
+    {
+
+      for (int i = 0; i < customList.Count; i++)
+      {
+        if (customList[i].Equals(element))
+        {
+          return true;
+        }
+      }
+
+      return false;
+
+
     }
 
     private void SearchAndRemoveFirstInstance(T itemToRemove)
