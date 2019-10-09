@@ -125,8 +125,26 @@ namespace List
       }
 
       return false;
+    }
 
+    public CustomList<T> Zip(CustomList<T> listToZipWith)
+    {
+      CustomList<T> workingCustomList = new CustomList<T>();
 
+      for (int i = 0; i < Count || i < listToZipWith.Count; i++)
+      {
+        if (items[i] != null && i < Count)
+        {
+          workingCustomList.Add(items[i]);
+        }
+
+        if (listToZipWith[i] != null && i < listToZipWith.Count)
+        {
+          workingCustomList.Add(listToZipWith[i]);
+        }
+      }
+
+      return workingCustomList;
     }
 
     private void SearchAndRemoveFirstInstance(T itemToRemove)

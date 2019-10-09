@@ -395,5 +395,44 @@ namespace ListTest
       }
     }
 
+    [TestMethod]
+    public void Zip_PutTwoCustomListsTogether()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(0);
+      testList.Add(2);
+      testList.Add(4);
+      testList.Add(6);
+      testList.Add(8);
+
+      CustomList<int> testListb = new CustomList<int>();
+
+      testListb.Add(1);
+      testListb.Add(3);
+      testListb.Add(5);
+      testListb.Add(7);
+      testListb.Add(9);
+
+      CustomList<int> actual = testList.Zip(testListb);
+      CustomList<int> testListc = new CustomList<int>();
+
+      testListc.Add(0);
+      testListc.Add(1);
+      testListc.Add(2);
+      testListc.Add(3);
+      testListc.Add(4);
+      testListc.Add(5);
+      testListc.Add(6);
+      testListc.Add(7);
+      testListc.Add(8);
+      testListc.Add(9);
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], actual[i]);
+      }
+    }
+
   }
 }
