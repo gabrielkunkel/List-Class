@@ -9,95 +9,41 @@ namespace ListTest
   {
 
     [TestMethod]
-    public void Count_2ItemsHaveNullableTypes()
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void Indexer_GreaterCapacity_ThrowOutsideOfRange()
     {
-      // arrange
       CustomList<string> testList = new CustomList<string>(10);
       testList[2] = "Bob";
-      testList[4] = "Shari";
-
-      // act
-      int actual = testList.Count;
-      int expected = 2;
-
-      // assert
-      Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void Capacity_2ItemsHaveNullableTypes()
+    public void Capacity_ConstructorMakesThree()
     {
-      // arrange
-      CustomList<string> testList = new CustomList<string>(10);
-      testList[2] = "Bob";
-      testList[4] = "Shari";
-
-      // act
+      CustomList<int> testList = new CustomList<int>(3);
+      
       int actual = testList.Capacity;
-      int expected = 10;
+      int expected = 3;
 
-      // assert
       Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void Constructor_IntCreateEmptyClassWithSetCapacity()
+    public void Count_ConstructorMakesThree_ShouldReturn0()
     {
-      // arrange
-      CustomList<int> testList = new CustomList<int>(3);
-      testList[2] = 4;
-
-      // act
-      int actual = testList[2];
-      int expected = 4;
-
-      // assert
-      Assert.AreEqual(expected, actual);
-      Assert.AreEqual(testList[0], 0);
-    }
-
-    [TestMethod]
-    public void Constructor_IntCreateEmptyClassWithSetCapacity_UnassignedAreZero()
-    {
-      // arrange
       CustomList<int> testList = new CustomList<int>(3);
 
-      // act
-      testList[2] = 4;
+      int actual = testList.Count;
+      int expected = 0;
 
-      // assert
-      Assert.AreEqual(testList[0], 0);
-      Assert.AreEqual(testList[1], 0);
-    }
-
-    [TestMethod]
-    public void Constructor_StringCreateEmptyClassWithSetCapacity()
-    {
-      // arrange
-      CustomList<string> testList = new CustomList<string>(3);
-      testList[2] = "Daryl";
-
-      // act
-      string actual = testList[2];
-      string expected = "Daryl";
-
-      // assert
       Assert.AreEqual(expected, actual);
     }
 
     [TestMethod]
-    public void Constructor_StringCreateEmptyClassWithSetCapacity_UnassignedAreNull()
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void Capacity_StringCreateEmptyClassWithConstructorSet_ShouldThrow()
     {
-      // arrange
       CustomList<string> testList = new CustomList<string>(3);
-
-
-      // act
       testList[2] = "Daryl";
-
-      // assert
-      Assert.AreEqual(testList[0], null);
-      Assert.AreEqual(testList[1], null);
     }
 
 

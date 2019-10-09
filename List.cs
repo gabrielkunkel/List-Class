@@ -15,6 +15,7 @@ namespace List
     }
 
     public int Count { get => getTotalElementsUsed(); }
+    // todo: when you set Count, check capacity and update it accordingly?
 
 
     public CustomList()
@@ -30,12 +31,14 @@ namespace List
     public T this[int i]
     {
       get { return items[i]; }
+      // todo: if out of Count range throw exception
       set { items[i] = value; }
     }
 
     public void Add(T itemToAdd)
     {
       T[] newArray = new T[items.Length + 1];
+      // todo: set length at 2X threshold when at capacity
 
       for (int i = 0; i < items.Length; i++)
       {
@@ -47,6 +50,7 @@ namespace List
 
     public void Remove(T itemToRemove)
     {
+      // todo: reduce length at Capacity/2
 
     }
 
