@@ -385,6 +385,56 @@ namespace ListTest
     }
 
     [TestMethod]
+    public void PlusOperator_CombineTwoIntLists_ReturnCombinedCount()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(0);
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+      testList.Add(4);
+
+      CustomList<int> testListb = new CustomList<int>();
+
+      testListb.Add(5);
+      testListb.Add(6);
+      testListb.Add(7);
+      testListb.Add(8);
+      testListb.Add(9);
+
+      CustomList<int> actual = testList + testListb;
+
+
+      Assert.AreEqual(10, actual.Count);
+    }
+
+    [TestMethod]
+    public void PlusOperator_CombineListsAreUnaltered_ReturnCombinedCount()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(0);
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+      testList.Add(4);
+
+      CustomList<int> testListb = new CustomList<int>();
+
+      testListb.Add(5);
+      testListb.Add(6);
+      testListb.Add(7);
+      testListb.Add(8);
+      testListb.Add(9);
+
+      CustomList<int> actual = testList + testListb;
+
+
+      Assert.AreEqual(actual.Count, testList.Count + testListb.Count);
+    }
+
+    [TestMethod]
     public void MinusOperator_SubtractOneIstanceFromAnother()
     {
       CustomList<int> testList = new CustomList<int>();

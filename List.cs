@@ -71,12 +71,19 @@ namespace List
 
     public static CustomList<T> operator + (CustomList<T> a, CustomList<T> b)
     {
-      foreach (T item in b)
+      CustomList<T> workingList = new CustomList<T>();
+
+      foreach (T item in a)
       {
-        a.Add(item);
+        workingList.Add(item);
       }
 
-      return a;
+      foreach (T item in b)
+      {
+        workingList.Add(item);
+      }
+
+      return workingList;
     }
 
     public static CustomList<T> operator - (CustomList<T> a, CustomList<T> b)
