@@ -17,7 +17,23 @@ namespace ListTest
     }
 
     [TestMethod]
-    public void Capacity_ConstructorMakesThree()
+    [ExpectedException(typeof(IndexOutOfRangeException))]
+    public void Indexer_GetAtCount_ThrowOutsideOfIndex()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(0);
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(3);
+      testList.Add(4);
+      testList.Remove(4);
+
+      int number = testList[4];
+    }
+
+    [TestMethod]
+    public void Capacity_ConstructorMakesThree_CapacityEquals3()
     {
       CustomList<int> testList = new CustomList<int>(3);
       
@@ -465,6 +481,78 @@ namespace ListTest
         Assert.AreEqual(testListc[i], actual[i]);
       }
     }
+
+    [TestMethod]
+    public void MinusOperator_SubtractOneIstanceFromAnother_Strings()
+    {
+      CustomList<string> testList = new CustomList<string>();
+
+      testList.Add("aaa");
+      testList.Add("ccc");
+      testList.Add("eee");
+      testList.Add("ggg");
+      testList.Add("iii");
+
+      CustomList<string> testListb = new CustomList<string>();
+
+      testListb.Add("bbb");
+      testListb.Add("ddd");
+      testListb.Add("fff");
+      testListb.Add("hhh");
+      testListb.Add("jjj");
+      testListb.Add("ggg");
+
+      CustomList<string> actual = testList - testListb;
+      CustomList<string> testListc = new CustomList<string>();
+
+      testListc.Add("aaa");
+      testListc.Add("ccc");
+      testListc.Add("eee");
+      testListc.Add("iii");
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], actual[i]);
+      }
+
+    }
+
+    [TestMethod]
+    public void MinusOperator_SubtractMultipleIstanceFromAnother_Strings()
+    {
+      CustomList<string> testList = new CustomList<string>();
+
+      testList.Add("aaa");
+      testList.Add("ccc");
+      testList.Add("eee");
+      testList.Add("ggg");
+      testList.Add("iii");
+      testList.Add("ggg");
+
+      CustomList<string> testListb = new CustomList<string>();
+
+      testListb.Add("bbb");
+      testListb.Add("ddd");
+      testListb.Add("fff");
+      testListb.Add("hhh");
+      testListb.Add("jjj");
+      testListb.Add("ggg");
+      testListb.Add("aaa");
+
+      CustomList<string> actual = testList - testListb;
+      CustomList<string> testListc = new CustomList<string>();
+
+      testListc.Add("ccc");
+      testListc.Add("eee");
+      testListc.Add("iii");
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], actual[i]);
+      }
+
+    }
+
 
     [TestMethod]
     public void Zip_PutTwoCustomIntListsTogether()

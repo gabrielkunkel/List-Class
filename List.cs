@@ -43,7 +43,7 @@ namespace List
         }
       }
       set {
-        if (i < 0 || i > count)
+        if (i < 0 || i >= count)
         {
           throw new ArgumentOutOfRangeException();
         }
