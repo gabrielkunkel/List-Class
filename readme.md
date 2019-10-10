@@ -1,9 +1,9 @@
 List Implementation
 ===================
 
-## CustomList<T> - CustomList<T> Method
+## CustomList<T> - (minus) CustomList<T> Method
 
-Removes the occurence of any items of CustomList<T> listed in second CustomList<T> following the minus operator.
+Removes the occurence of any items of CustomList<T> listed in a second CustomList<T> following the minus operator.
 
 ```C#
 public CustomList<T> c = CustomList<T> a -  CustomList<T> b

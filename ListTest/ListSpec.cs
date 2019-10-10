@@ -28,6 +28,14 @@ namespace ListTest
     }
 
     [TestMethod]
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void Capacity_IntCreateEmptyClassWithConstructorSet_ShouldThrow()
+    {
+      CustomList<int> testList = new CustomList<int>(3);
+      testList[2] = 5;
+    }
+
+    [TestMethod]
     public void Count_ConstructorMakesThree_ShouldReturn0()
     {
       CustomList<int> testList = new CustomList<int>(3);
@@ -36,14 +44,6 @@ namespace ListTest
       int expected = 0;
 
       Assert.AreEqual(expected, actual);
-    }
-
-    [TestMethod]
-    [ExpectedException(typeof(ArgumentOutOfRangeException))]
-    public void Capacity_IntCreateEmptyClassWithConstructorSet_ShouldThrow()
-    {
-      CustomList<int> testList = new CustomList<int>(3);
-      testList[2] = 5;
     }
 
     [TestMethod]
@@ -269,6 +269,27 @@ namespace ListTest
     }
 
     [TestMethod]
+    public void Remove_ListWithMultipleSameIntValues_OnlyRemovesOne()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(1);
+      testList.Add(3);
+      testList.Add(1);
+
+      Assert.AreEqual(5, testList.Count);
+
+      testList.Remove(1);
+
+      Assert.AreEqual(4, testList.Count);
+      Assert.AreEqual(2, testList[0]);
+      Assert.AreEqual(1, testList[1]);
+      Assert.AreEqual(1, testList[3]);
+    }
+
+    [TestMethod]
     public void GetEnumerator_UseForEachOnIntList()
     {
       CustomList<int> testList = new CustomList<int>();
@@ -396,7 +417,7 @@ namespace ListTest
     }
 
     [TestMethod]
-    public void Zip_PutTwoCustomListsTogether()
+    public void Zip_PutTwoCustomIntListsTogether()
     {
       CustomList<int> testList = new CustomList<int>();
 
@@ -433,6 +454,125 @@ namespace ListTest
         Assert.AreEqual(testListc[i], actual[i]);
       }
     }
+
+    [TestMethod]
+    public void Zip_PutTwoCustomStringListsTogether()
+    {
+      CustomList<string> testList = new CustomList<string>();
+
+      testList.Add("aaa");
+      testList.Add("ccc");
+      testList.Add("eee");
+      testList.Add("ggg");
+      testList.Add("iii");
+
+      CustomList<string> testListb = new CustomList<string>();
+
+      testListb.Add("bbb");
+      testListb.Add("ddd");
+      testListb.Add("fff");
+      testListb.Add("hhh");
+      testListb.Add("jjj");
+
+      CustomList<string> actual = testList.Zip(testListb);
+      CustomList<string> testListc = new CustomList<string>();
+
+      testListc.Add("aaa");
+      testListc.Add("bbb");
+      testListc.Add("ccc");
+      testListc.Add("ddd");
+      testListc.Add("eee");
+      testListc.Add("fff");
+      testListc.Add("ggg");
+      testListc.Add("hhh");
+      testListc.Add("iii");
+      testListc.Add("jjj");
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], actual[i]);
+      }
+    }
+
+    [TestMethod]
+    public void Zip_PutTwoUnevenIntListsTogether()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(0);
+      testList.Add(2);
+      testList.Add(4);
+      testList.Add(6);
+      testList.Add(7);
+      testList.Add(8);
+      testList.Add(9);
+
+      CustomList<int> testListb = new CustomList<int>();
+
+      testListb.Add(1);
+      testListb.Add(3);
+      testListb.Add(5);
+
+      CustomList<int> actual = testList.Zip(testListb);
+      CustomList<int> testListc = new CustomList<int>();
+
+      testListc.Add(0);
+      testListc.Add(1);
+      testListc.Add(2);
+      testListc.Add(3);
+      testListc.Add(4);
+      testListc.Add(5);
+      testListc.Add(6);
+      testListc.Add(7);
+      testListc.Add(8);
+      testListc.Add(9);
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], actual[i]);
+      }
+    }
+
+    [TestMethod]
+    public void Zip_PutTwoUnevenStringListsTogether()
+    {
+      CustomList<string> testList = new CustomList<string>();
+
+      testList.Add("aaa");
+      testList.Add("ccc");
+      testList.Add("eee");
+
+      CustomList<string> testListb = new CustomList<string>();
+
+      testListb.Add("bbb");
+      testListb.Add("ddd");
+      testListb.Add("fff");
+      testListb.Add("ggg");
+      testListb.Add("hhh");
+      testListb.Add("iii");
+      testListb.Add("jjj");
+
+      CustomList<string> actual = testList.Zip(testListb);
+      CustomList<string> testListc = new CustomList<string>();
+
+      testListc.Add("aaa");
+      testListc.Add("bbb");
+      testListc.Add("ccc");
+      testListc.Add("ddd");
+      testListc.Add("eee");
+      testListc.Add("fff");
+      testListc.Add("ggg");
+      testListc.Add("hhh");
+      testListc.Add("iii");
+      testListc.Add("jjj");
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], actual[i]);
+      }
+    }
+
+
 
   }
 }

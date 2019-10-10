@@ -133,12 +133,12 @@ namespace List
 
       for (int i = 0; i < Count || i < listToZipWith.Count; i++)
       {
-        if (items[i] != null && i < Count)
+        if (i < Count)
         {
           workingCustomList.Add(items[i]);
         }
 
-        if (listToZipWith[i] != null && i < listToZipWith.Count)
+        if (i < listToZipWith.Count)
         {
           workingCustomList.Add(listToZipWith[i]);
         }
