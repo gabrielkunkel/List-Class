@@ -62,11 +62,12 @@ namespace List
       items = workingArray;
     }
 
-    public void Remove(T itemToRemove)
+    public Boolean Remove(T itemToRemove)
     {
       count -= 1;
-      SearchAndRemoveFirstInstance(itemToRemove);
+      bool removedAnInstance = SearchAndRemoveFirstInstance(itemToRemove);
       ShrinkItemsArrayCapacity();
+      return removedAnInstance;
     }
 
     public static CustomList<T> operator + (CustomList<T> a, CustomList<T> b)
@@ -154,7 +155,7 @@ namespace List
       return workingCustomList;
     }
 
-    private void SearchAndRemoveFirstInstance(T itemToRemove)
+    private bool SearchAndRemoveFirstInstance(T itemToRemove)
     {
       bool firstInstanceFound = false;
 
@@ -173,6 +174,8 @@ namespace List
           items[i-1] = items[i];
         }
       }
+
+      return firstInstanceFound;
     }
 
     private T[] SetItemsArrayCapacityForGrowth(ref T[] workingArray)

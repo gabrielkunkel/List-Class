@@ -306,6 +306,38 @@ namespace ListTest
     }
 
     [TestMethod]
+    public void Remove_ListWithIntValue_ReturnTrue()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(1);
+      testList.Add(3);
+      testList.Add(1);
+
+      Boolean actual = testList.Remove(1);
+
+      Assert.AreEqual(true, actual);
+    }
+
+    [TestMethod]
+    public void Remove_ListWithOutIntValue_ReturnFalse()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(1);
+      testList.Add(2);
+      testList.Add(1);
+      testList.Add(3);
+      testList.Add(1);
+
+      Boolean actual = testList.Remove(12);
+
+      Assert.AreEqual(false, actual);
+    }
+
+    [TestMethod]
     public void GetEnumerator_UseForEachOnIntList()
     {
       CustomList<int> testList = new CustomList<int>();
