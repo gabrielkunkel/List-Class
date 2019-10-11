@@ -9,7 +9,6 @@ namespace List
   {
     private T[] items;
     private int count;
-    private IEnumerable input;
 
     public int Capacity
     {
@@ -29,11 +28,6 @@ namespace List
     public CustomList(int startingCapacity)
     {
       items = new T[startingCapacity];
-    }
-
-    public CustomList(IEnumerable input)
-    {
-      this.input = input;
     }
 
     public T this[int i]
