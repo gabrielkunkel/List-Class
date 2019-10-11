@@ -5,10 +5,11 @@ using System.Text;
 
 namespace List
 {
-  public class CustomList<T> : IEnumerable<T>
+  public class CustomList<T> : IEnumerable<T> where T : IComparable
   {
     private T[] items;
     private int count;
+    private IEnumerable input;
 
     public int Capacity
     {
@@ -28,6 +29,11 @@ namespace List
     public CustomList(int startingCapacity)
     {
       items = new T[startingCapacity];
+    }
+
+    public CustomList(IEnumerable input)
+    {
+      this.input = input;
     }
 
     public T this[int i]
@@ -211,6 +217,12 @@ namespace List
         workingArray[i] = items[i];
       }
       return workingArray;
+    }
+
+    public void Sort()
+    {
+      QuickSorter quickSorter = new QuickSorter();
+      items = quickSorter.Sort<T>(items, Count - 1);
     }
 
     public IEnumerator<T> GetEnumerator()

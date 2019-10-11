@@ -710,7 +710,80 @@ namespace ListTest
       }
     }
 
+    [TestMethod]
+    public void Sort_ints_ReturnsSortedArrayInOrder()
+    {
+      CustomList<int> testList = new CustomList<int>();
 
+      testList.Add(0);
+      testList.Add(9);
+      testList.Add(2);
+      testList.Add(3);
+      testList.Add(7);
+      testList.Add(4);
+      testList.Add(6);
+      testList.Add(8);
+      testList.Add(1);
+      testList.Add(5);
+
+      CustomList<int> testListc = new CustomList<int>();
+
+      testListc.Add(0);
+      testListc.Add(1);
+      testListc.Add(2);
+      testListc.Add(3);
+      testListc.Add(4);
+      testListc.Add(5);
+      testListc.Add(6);
+      testListc.Add(7);
+      testListc.Add(8);
+      testListc.Add(9);
+
+      testList.Sort();
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], testList[i]);
+      }
+    }
+
+    [TestMethod]
+    public void Sort_strings_ReturnsSortedArrayInOrder()
+    {
+      CustomList<string> testList = new CustomList<string>();
+
+      testList.Add("Joe");
+      testList.Add("Cat");
+      testList.Add("Ebb");
+      testList.Add("Bob");
+      testList.Add("Fig");
+      testList.Add("Dad");
+      testList.Add("Inn");
+      testList.Add("Hop");
+      testList.Add("God");
+      testList.Add("Abe");
+
+
+      CustomList<string> testListc = new CustomList<string>();
+
+      testListc.Add("Abe");
+      testListc.Add("Bob");
+      testListc.Add("Cat");
+      testListc.Add("Dad");
+      testListc.Add("Ebb");
+      testListc.Add("Fig");
+      testListc.Add("God");
+      testListc.Add("Hop");
+      testListc.Add("Inn");
+      testListc.Add("Joe");
+
+      testList.Sort();
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], testList[i]);
+      }
+    }
 
   }
 }
