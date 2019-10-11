@@ -215,8 +215,46 @@ namespace List
 
     public void Sort()
     {
-      QuickSorter quickSorter = new QuickSorter();
-      items = quickSorter.Sort<T>(items, Count - 1);
+      items = Sorter(items, Count - 1);
+    }
+
+    public T[] Sorter(T[] items, int count)
+    {
+      T[] sortedItems = items;
+      QuickSort(ref items, 0, count);
+      return sortedItems;
+    }
+
+    // Quicksort Implementation Adapted from: https://blogsprajeesh.blogspot.com/2008/07/generic-implementation-of-sorting_17.html
+    private void QuickSort(ref T[] sortedItems, int left, int right)
+    {
+      if (right <= left) return;
+      int i = Partition(ref sortedItems, left, right);
+      QuickSort(ref sortedItems, left, i - 1);
+      QuickSort(ref sortedItems, i + 1, right);
+    }
+    private int Partition(ref T[] a, int l, int r)
+    {
+      T tmp;
+      int i = l - 1;
+      int j = r;
+      T v = a[r]; for (; ; )
+      {
+        while (a[++i].CompareTo(v) == -1)
+        {
+        }
+        while (v.CompareTo(a[--j]) == -1)
+        {
+          if (j == l) break;
+        }
+        if (i >= j) break;
+        tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+      }
+      a[r] = a[i];
+      a[i] = v;
+      return i;
     }
 
     public IEnumerator<T> GetEnumerator()
