@@ -90,13 +90,26 @@ namespace List
     public static CustomList<T> operator - (CustomList<T> a, CustomList<T> b)
     {
       CustomList<T> newList = new CustomList<T>();
+      CustomList<T> listB = b.Clone();
 
       for (int i = 0; i < a.Count; i++)
       {
-        if(IsElementInCustomList(a[i], b) == false)
+        if(IsElementInCustomList(a[i], ref listB) == false)
         {
           newList.Add(a[i]);
         }
+      }
+
+      return newList;
+    }
+
+    public CustomList<T> Clone()
+    {
+      CustomList<T> newList = new CustomList<T>();
+
+      for (int i = 0; i < this.Count; i++)
+      {
+        newList.Add(this[i]);
       }
 
       return newList;
@@ -121,13 +134,14 @@ namespace List
       return workingString.ToString();
     }
 
-    private static bool IsElementInCustomList(T element, CustomList<T> customList)
+    private static bool IsElementInCustomList(T element, ref CustomList<T> customList)
     {
 
       for (int i = 0; i < customList.Count; i++)
       {
         if (customList[i].Equals(element))
         {
+          customList.Remove(customList[i]);
           return true;
         }
       }

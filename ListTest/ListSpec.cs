@@ -550,6 +550,39 @@ namespace ListTest
     }
 
     [TestMethod]
+    public void MinusOperator_SubtractONLYOneIntIstanceFromAnother()
+    {
+      CustomList<int> testList = new CustomList<int>();
+
+      testList.Add(1);
+      testList.Add(1);
+      testList.Add(1);
+      testList.Add(1);
+      testList.Add(1);
+
+      CustomList<int> testListb = new CustomList<int>();
+
+      testListb.Add(0);
+      testListb.Add(1);
+      testListb.Add(5);
+      testListb.Add(6);
+      testListb.Add(7);
+
+      CustomList<int> actual = testList - testListb;
+      CustomList<int> testListc = new CustomList<int>();
+
+      testListc.Add(1);
+      testListc.Add(1);
+      testListc.Add(1);
+      testListc.Add(1);
+
+      for (int i = 0; i < testListc.Count; i++)
+      {
+        Assert.AreEqual(testListc[i], actual[i]);
+      }
+    }
+
+    [TestMethod]
     public void MinusOperator_SubtractMultipleIstanceFromAnother_Strings()
     {
       CustomList<string> testList = new CustomList<string>();
@@ -557,18 +590,18 @@ namespace ListTest
       testList.Add("aaa");
       testList.Add("ccc");
       testList.Add("eee");
-      testList.Add("ggg");
+      testList.Add("aaa");
       testList.Add("iii");
-      testList.Add("ggg");
 
       CustomList<string> testListb = new CustomList<string>();
 
       testListb.Add("bbb");
+      testListb.Add("aaa");
       testListb.Add("ddd");
       testListb.Add("fff");
       testListb.Add("hhh");
       testListb.Add("jjj");
-      testListb.Add("ggg");
+      testListb.Add("aaa");
       testListb.Add("aaa");
 
       CustomList<string> actual = testList - testListb;
