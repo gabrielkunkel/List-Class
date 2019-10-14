@@ -232,17 +232,10 @@ namespace List
 
     public void Sort()
     {
-      items = Sorter(items, Count - 1);
+      QuickSort(ref items, 0, count-1);
     }
 
-    public T[] Sorter(T[] items, int count)
-    {
-      T[] sortedItems = items;
-      QuickSort(ref items, 0, count);
-      return sortedItems;
-    }
-
-    // Quicksort Implementation Adapted from: https://blogsprajeesh.blogspot.com/2008/07/generic-implementation-of-sorting_17.html
+    // Quicksort implementation adapated from: https://blogsprajeesh.blogspot.com/2008/07/generic-implementation-of-sorting_17.html
     private void QuickSort(ref T[] sortedItems, int left, int right)
     {
       if (right <= left) return;
